@@ -86,3 +86,45 @@ def generate_covariance_matrix(n):
     # Compute the covariance matrix as Sigma = L*L^T
     Sigma = np.dot(L, L.T)
     return Sigma
+
+***
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Define a function to generate a random vector with a given covariance matrix
+def generate_random_vector(cov_matrix):
+  # Get the dimension of the covariance matrix
+  dim = cov_matrix.shape[0]
+  # Get the eigenvalues and eigenvectors of the covariance matrix
+  eigvals, eigvecs = np.linalg.eig(cov_matrix)
+  # Generate a standard normal random vector of the same dimension
+  z = np.random.randn(dim)
+  # Transform the standard normal random vector using the eigenvectors and eigenvalues
+  x = eigvecs @ np.diag(np.sqrt(eigvals)) @ z
+  # Return the transformed random vector
+  return x
+
+# Define some example covariance matrices with different dimensions and eigenvalues
+cov_matrix_1 = np.array([[4, 2], [2, 3]]) # 2 x 2 matrix with eigenvalues 5 and 2
+cov_matrix_2 = np.array([[1, -0.5, 0], [-0.5, 2, -0.8], [0, -0.8, 3]]) # 3 x 3 matrix with eigenvalues 3.6, 1.9 and 0.5
+cov_matrix_3 = np.array([[9, -6, -3], [-6, 16, -4], [-3, -4, 9]]) # 3 x 3 matrix with eigenvalues 20, 10 and 4
+
+# Generate some random vectors with the given covariance matrices
+x_1 = generate_random_vector(cov_matrix_1)
+x_2 = generate_random_vector(cov_matrix_2)
+x_3 = generate_random_vector(cov_matrix_3)
+
+# Plot the histograms of the random vectors
+plt.figure(figsize=(12,8))
+plt.subplot(2,2,1)
+plt.hist(x_1)
+plt.title("Histogram of x_1 with cov_matrix_1")
+plt.subplot(2,2,2)
+plt.hist(x_2)
+plt.title("Histogram of x_2 with cov_matrix_2")
+plt.subplot(2,2,3)
+plt.hist(x_3)
+plt.title("Histogram of x_3 with cov_matrix_3")
+plt.show()
