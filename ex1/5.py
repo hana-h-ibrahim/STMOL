@@ -73,3 +73,16 @@ plt.title('Elliptical Covariance Matrix')
 
 plt.tight_layout()
 plt.show()
+
+***
+
+import numpy as np
+
+def generate_covariance_matrix(n):
+    # Generate a lower triangular matrix with positive diagonal entries
+    L = np.tril(np.random.rand(n, n))
+    L[np.diag_indices_from(L)] = np.exp(L[np.diag_indices_from(L)])
+    
+    # Compute the covariance matrix as Sigma = L*L^T
+    Sigma = np.dot(L, L.T)
+    return Sigma
