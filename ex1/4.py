@@ -1,5 +1,5 @@
-modeled here: https://colab.research.google.com/#scrollTo=OjTfIfVnvFYA
-
+https://colab.research.google.com/drive/1lLLTK7o4A03802h9lzM5V2lLVb98-tTa
+  
 4a)
 
 import numpy as np
